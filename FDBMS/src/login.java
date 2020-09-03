@@ -190,7 +190,7 @@ public class login extends javax.swing.JFrame {
         ResultSet rs;
         String user = username.getText();
         String pass = password.getText();
-        String sql = "SELECT * FROM user   WHERE username =? AND password =?";
+        String sql = "SELECT * FROM login   WHERE username =? AND password =?";
             
             try{
             ps = con.getConnection().prepareCall(sql, DEFAULT_CURSOR, DISPOSE_ON_CLOSE);

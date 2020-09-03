@@ -1,3 +1,12 @@
+
+import static java.lang.System.console;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -60,6 +69,11 @@ public class account extends javax.swing.JFrame {
         create.setBackground(new java.awt.Color(102, 102, 255));
         create.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
         create.setLabel("CREATE");
+        create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,6 +150,35 @@ public class account extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_cancleActionPerformed
+private    MyConnection con;
+    private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
+        // TODO add your handling code here:
+    
+        ResultSet rs = null;
+        String nuser = username.getText();
+        String num = phone.getText();
+        String loc = location.getText();
+        PreparedStatement myStmt = null;
+        try{ 
+            String sql = "INSERT INTO members"+"(id, memebrsName, memberPhone, location, date" + " Value(id = ?, membersName = ?,memberPhone = ?, location = ?, date = ? )";
+             myStmt = con.getConnection().prepareStatement();
+             // set params
+             myStmt.executeUpdate();
+              JOptionPane.showConfirmDialog(phone, " SUBMIT", "Login systems",
+        JOptionPane.YES_NO_OPTION);
+                    /* if(myStmt.execute()){
+                 JOptionPane.showConfirmDialog(phone, " SUBMIT", "Login systems",
+        JOptionPane.YES_NO_OPTION);
+             }else{
+                 JOptionPane.showConfirmDialog(phone, "NOT SUBMIT", "Login systems",
+        JOptionPane.YES_NO_OPTION);
+             }*/
+                
+                       
+        }catch(Exception ex){
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_createActionPerformed
 
     /**
      * @param args the command line arguments
