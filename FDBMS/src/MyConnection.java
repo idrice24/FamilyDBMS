@@ -16,7 +16,7 @@ import java.sql.Statement;
 public class MyConnection {
     // we create a function to connect with mysql database
     public static Connection getConnection(){
-        Connection con = null;
+        Connection con = null ;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fdbms", "root", "idrice");
@@ -26,8 +26,5 @@ public class MyConnection {
         return con;
     }
 
-    Statement createStatement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

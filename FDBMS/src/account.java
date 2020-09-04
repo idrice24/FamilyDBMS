@@ -1,5 +1,7 @@
 
 import static java.lang.System.console;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -45,6 +47,7 @@ public class account extends javax.swing.JFrame {
         location = new javax.swing.JTextField();
         cancle = new java.awt.Button();
         create = new java.awt.Button();
+        rest = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +60,12 @@ public class account extends javax.swing.JFrame {
         jLabel3.setText("USER NAME");
 
         jLabel4.setText("LOCATION");
+
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
 
         cancle.setBackground(new java.awt.Color(255, 102, 102));
         cancle.setLabel("CANCEL");
@@ -75,6 +84,15 @@ public class account extends javax.swing.JFrame {
             }
         });
 
+        rest.setBackground(new java.awt.Color(0, 204, 51));
+        rest.setFont(new java.awt.Font("Book Antiqua", 1, 14)); // NOI18N
+        rest.setLabel("RESET");
+        rest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,22 +103,27 @@ public class account extends javax.swing.JFrame {
                 .addGap(98, 98, 98))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(create, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(cancle, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(55, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(cancle, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,10 +143,15 @@ public class account extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(create, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(cancle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cancle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(create, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,7 +178,7 @@ public class account extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_cancleActionPerformed
-private    MyConnection con;
+    MyConnection conn = new MyConnection();
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         // TODO add your handling code here:
     
@@ -158,27 +186,34 @@ private    MyConnection con;
         String nuser = username.getText();
         String num = phone.getText();
         String loc = location.getText();
-        PreparedStatement myStmt = null;
+        Statement myStmt = null;
+        //test the output values
+        System.out.println("the ouput is "+ nuser +"and"+num+" And location:"+loc);
+        //Connection myConn = null;
         try{ 
-            String sql = "INSERT INTO members"+"(id, memebrsName, memberPhone, location, date" + " Value(id = ?, membersName = ?,memberPhone = ?, location = ?, date = ? )";
-             myStmt = con.getConnection().prepareStatement();
-             // set params
-             myStmt.executeUpdate();
-              JOptionPane.showConfirmDialog(phone, " SUBMIT", "Login systems",
-        JOptionPane.YES_NO_OPTION);
-                    /* if(myStmt.execute()){
-                 JOptionPane.showConfirmDialog(phone, " SUBMIT", "Login systems",
-        JOptionPane.YES_NO_OPTION);
-             }else{
-                 JOptionPane.showConfirmDialog(phone, "NOT SUBMIT", "Login systems",
-        JOptionPane.YES_NO_OPTION);
-             }*/
-                
+            //create Prepare statements here..
+            String sql = "INSERT INTO members( membersName, memberPhone, location) VALUES('"+nuser+"','"+num+"', '"+loc+"' )";
+            myStmt = conn.getConnection().createStatement();
+            myStmt.executeUpdate(sql);
+              JOptionPane.showMessageDialog(null, " SUBMIT", "Login systems",
+        JOptionPane.OK_OPTION);
                        
         }catch(Exception ex){
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                          JOptionPane.showMessageDialog(null, "NOT SUBMIT", "Login systems",
+        JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_createActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+String mname = username.getText();        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void restActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restActionPerformed
+        // TODO add your handling code here:
+        username.setText(null);
+        phone.setText(null);
+        location.setText(null);
+    }//GEN-LAST:event_restActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +260,7 @@ private    MyConnection con;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField location;
     private javax.swing.JTextField phone;
+    private java.awt.Button rest;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
