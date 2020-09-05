@@ -182,7 +182,6 @@ public class account extends javax.swing.JFrame {
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         // TODO add your handling code here:
     
-        ResultSet rs = null;
         String nuser = username.getText();
         String num = phone.getText();
         String loc = location.getText();

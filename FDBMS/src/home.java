@@ -63,6 +63,11 @@ public class home extends javax.swing.JFrame {
         });
 
         button3.setLabel("AUTHRE");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,6 +291,12 @@ public class home extends javax.swing.JFrame {
         account acc = new account();
         acc.setVisible(true);
     }//GEN-LAST:event_accountActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+            TaskForm tf = new TaskForm();
+            tf.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
