@@ -1,6 +1,9 @@
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -60,6 +63,8 @@ public class submit extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setAutoscrolls(true);
+        jPanel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("SUBMIT FORM");
@@ -200,7 +205,8 @@ public class submit extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        amount.setText(null);        // TODO add your handling code here:
+        amount.setText(null);
+        jComboBox1.list();      // TODO add your handling code here:
     }//GEN-LAST:event_resetActionPerformed
         MyConnection conn = new MyConnection();
         PreparedStatement pst;
@@ -213,11 +219,13 @@ public class submit extends javax.swing.JFrame {
             while(rs.next()){
                 String membersName = rs.getString("membersName");
                 jComboBox1.addItem(membersName);
+                System.out.println(membersName );
             }
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-                    
-                    }  
+            pst.close();
+            rs.close();
+            } catch (SQLException ex) {
+            Logger.getLogger(submit.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
   }
   
@@ -232,10 +240,13 @@ public class submit extends javax.swing.JFrame {
             String sql ="SELECT * FROM task";
             pst = conn.getConnection().prepareStatement(sql);
             rs = pst.executeQuery(sql);
+            
             while(rs.next()){
                 String tasksName = rs.getString("taskName");
                 jComboBox1.addItem(tasksName);
+               System.out.println(tasksName );
             }
+            
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(this, ex.getMessage());
                     
