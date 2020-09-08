@@ -6,5 +6,6 @@
 	<a href="https://github.com/idrice24/FamilyDBM.svg" title="License"><img src="https://img.shields.io/github/license/idrice24/FamilyDBM?style=flat-square"></a>
 </p>
 
-- System to manage family meeting 
+- System to manage family meeting (Destop Application in JAVA)
+this projecg is still under development
 
